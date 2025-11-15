@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио | Веб-разработчик</title>
+    <meta name="description" content="Профессиональное портфолио с проектами веб-разработки. Создаю красивые, функциональные сайты и приложения.">
+    <meta name="keywords" content="веб-разработчик, портфолио, фронтенд, бэкенд, React, JavaScript">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        secondary: "#8b5cf6",
+                        accent: "#06b6d4",
+                        dark: "#1e293b",
+                        light: "#f8fafc",
+                        'primary-light': '#818cf8',
+                        'secondary-light': '#a78bfa',
+                        'accent-light': '#22d3ee'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #6366f1;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+            border-radius: 0 0 4px 0;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-effect-dark {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .project-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .active-nav {
+            color: #06b6d4 !important;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .active-nav::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #06b6d4;
+            border-radius: 2px;
+        }
+        
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        input:focus,
+        textarea:focus {
+            outline: none;
+        }
+        
+        input:invalid:not(:focus):not(:placeholder-shown),
+        textarea:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: #ef4444;
+        }
+        
+        input:valid:not(:focus):not(:placeholder-shown),
+        textarea:valid:not(:focus):not(:placeholder-shown) {
+            border-color: #10b981;
+        }
+        
+        .error-message {
+            display: block;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        
+        #back-to-top {
+            transition: all 0.3s ease;
+        }
+        
+        #back-to-top.visible {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        * {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #6366f1;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f46e5;
+        }
+        
+        a:focus,
+        button:focus,
+        input:focus,
+        textarea:focus {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+        }
+        
+        @media print {
+            header,
+            footer,
+            #back-to-top,
+            #mobile-menu-button {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        @media (prefers-contrast: high) {
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid #000;
+            }
+            
+            .project-card {
+                border: 2px solid #000;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gradient-bg::before {
+                opacity: 0.5;
+            }
+            
+            .project-card:hover {
+                transform: none;
+            }
+        }
+        
+        img {
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+        
+        img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-light dark:bg-dark transition-colors duration-300 font-sans">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
+
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 glass-effect dark:glass-effect-dark" role="banner">
+        <nav class="container mx-auto px-6 py-4" role="navigation" aria-label="Основная навигация">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold text-white dark:text-light transition-colors" onclick="navigateTo('home'); return false;" aria-label="Главная страница">
+                    <span class="gradient-text">Портфолио</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-white dark:text-light hover:text-accent transition-colors duration-300 nav-link" data-section="home" aria-label="Главная">Главная</a>
+                    <a href="#about" class="text-white dark:text-light hover:text-accent transition-colors duration-300 nav-link" data-section="about" aria-label="Обо мне">Обо мне</a>
+                    <a href="#projects" class="text-white dark:text-light hover:text-accent transition-colors duration-300 nav-link" data-section="projects" aria-label="Проекты">Проекты</a>
+                    <a href="#contact" class="text-white dark:text-light hover:text-accent transition-colors duration-300 nav-link" data-section="contact" aria-label="Контакты">Контакты</a>
+                    
+                    <!-- Admin Panel Button -->
+                    <button 
+                        id="admin-login-btn"
+                        class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium"
+                        aria-label="Войти в админ-панель"
+                        title="Админ-панель"
+                    >
+                        <i class="fas fa-cog mr-2"></i>Админ
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button 
+                        id="theme-toggle" 
+                        class="w-10 h-10 rounded-full bg-white/10 dark:bg-gray-700/50 text-white dark:text-light hover:bg-white/20 transition-colors flex items-center justify-center"
+                        aria-label="Переключить тему"
+                        title="Переключить тему"
+                    >
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </div>
+                
+                <button 
+                    class="md:hidden text-white dark:text-light w-10 h-10 flex items-center justify-center" 
+                    id="mobile-menu-button"
+                    aria-label="Открыть меню"
+                    aria-expanded="false"
+                >
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden hidden mt-4 py-2 bg-white/10 dark:bg-gray-800/50 rounded-lg backdrop-blur-md" id="mobile-menu" role="menu">
+                <a href="#home" class="block px-4 py-2 text-white dark:text-light hover:text-accent transition-colors duration-300" onclick="navigateTo('home'); return false;" role="menuitem">Главная</a>
+                <a href="#about" class="block px-4 py-2 text-white dark:text-light hover:text-accent transition-colors duration-300" onclick="navigateTo('about'); return false;" role="menuitem">Обо мне</a>
+                <a href="#projects" class="block px-4 py-2 text-white dark:text-light hover:text-accent transition-colors duration-300" onclick="navigateTo('projects'); return false;" role="menuitem">Проекты</a>
+                <a href="#contact" class="block px-4 py-2 text-white dark:text-light hover:text-accent transition-colors duration-300" onclick="navigateTo('contact'); return false;" role="menuitem">Контакты</a>
+                <button 
+                    id="admin-login-btn-mobile" 
+                    class="w-full text-left px-4 py-2 text-white dark:text-light hover:text-accent transition-colors duration-300 flex items-center gap-2"
+                    aria-label="Войти в админ-панель"
+                >
+                    <i class="fas fa-cog"></i>
+                    <span>Админ-панель</span>
+                </button>
+                <button 
+                    id="theme-toggle-mobile" 
+                    class="w-full text-left px-4 py-2 text-white dark:text-light hover:text-accent transition-colors duration-300 flex items-center gap-2"
+                    aria-label="Переключить тему"
+                >
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                    <span>Переключить тему</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-md">
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lock text-primary text-2xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark dark:text-light mb-2">Вход в админ-панель</h2>
+                    <p class="text-gray-600 dark:text-gray-300">Введите пароль для доступа</p>
+                </div>
+                
+                <form id="admin-login-form" class="space-y-6">
+                    <div>
+                        <label for="admin-password-input" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Пароль</label>
+                        <input 
+                            type="password" 
+                            id="admin-password-input" 
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-dark dark:text-light"
+                            placeholder="Введите пароль"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </div>
+                    
+                    <div id="admin-login-error" class="hidden p-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg text-sm">
+                        <i class="fas fa-exclamation-circle mr-2"></i>Неверный пароль
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button 
+                            type="submit" 
+                            class="flex-1 bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition-all duration-300 transform hover:scale-105"
+                        >
+                            <i class="fas fa-sign-in-alt mr-2"></i>Войти
+                        </button>
+                        <button 
+                            type="button" 
+                            id="close-admin-modal"
+                            class="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                        >
+                            Отмена
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen gradient-bg flex items-center pt-20" aria-label="Главная секция">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-white animate-fade-in">
+                        <div class="inline-block mb-4 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm">
+                            <span class="text-sm">👋 Привет, я</span>
+                        </div>
+                        <h1 class="text-5xl lg:text-6xl font-bold mb-6">
+                            Креативный <span class="text-accent">Разработчик</span>
+                        </h1>
+                        <p class="text-xl mb-8 opacity-90 leading-relaxed">
+                            Создаю красивые, функциональные сайты и приложения, которые оживляют идеи с помощью кода и дизайна.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button 
+                                class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 transform" 
+                                onclick="navigateTo('projects')"
+                                aria-label="Посмотреть проекты"
+                            >
+                                <i class="fas fa-briefcase mr-2"></i>Смотреть работы
+                            </button>
+                            <button 
+                                class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition-all duration-300 transform hover:scale-105" 
+                                onclick="navigateTo('contact')"
+                                aria-label="Связаться со мной"
+                            >
+                                <i class="fas fa-envelope mr-2"></i>Связаться
+                            </button>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div class="flex gap-4 mt-8">
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110" aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://t.me/sigmaarttar" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110" aria-label="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="relative animate-float">
+                        <div class="w-80 h-80 mx-auto bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <div class="w-64 h-64 bg-white/20 rounded-full flex items-center justify-center">
+                                <img 
+                                    id="main-profile-photo"
+                                    src="images/photo.jpg" 
+                                    alt="Фото профиля" 
+                                    class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-2xl"
+                                    loading="eager"
+                                    width="200"
+                                    height="200"
+                                    onerror="this.onerror=null; this.src='https://picsum.photos/200/200?random=1'"
+                                    onload="this.style.opacity='1'"
+                                    style="opacity:0; transition:opacity 0.3s"
+                                />
+                            </div>
+                        </div>
+                        <!-- Floating elements -->
+                        <div class="absolute top-0 left-0 w-20 h-20 bg-accent/30 rounded-full blur-xl animate-pulse"></div>
+                        <div class="absolute bottom-0 right-0 w-32 h-32 bg-secondary/30 rounded-full blur-xl animate-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <a href="#about" onclick="navigateTo('about'); return false;" aria-label="Прокрутить вниз">
+                    <i class="fas fa-chevron-down text-white text-2xl"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-white dark:bg-gray-900 section-hidden" aria-label="Обо мне">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-dark dark:text-light mb-4">Обо мне</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mb-4"></div>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Увлеченный разработчик с опытом в современных веб-технологиях и ориентированным на пользователя дизайном.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <img 
+                            id="main-about-photo"
+                            src="images/photo-about.jpg" 
+                            alt="Иллюстрация обо мне" 
+                            class="rounded-2xl shadow-xl w-full transform hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                            width="500"
+                            height="400"
+                            onerror="this.onerror=null; this.src='https://picsum.photos/500/400?random=2'"
+                            onload="this.style.opacity='1'"
+                            style="opacity:0; transition:opacity 0.3s"
+                        />
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-2xl -z-10"></div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-dark dark:text-light mb-3">Навыки и экспертиза</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light px-4 py-2 rounded-full font-medium">HTML/CSS</span>
+                                <span class="bg-secondary/10 dark:bg-secondary/20 text-secondary dark:text-secondary-light px-4 py-2 rounded-full font-medium">JavaScript</span>
+                                <span class="bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent-light px-4 py-2 rounded-full font-medium">React</span>
+                                <span class="bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light px-4 py-2 rounded-full font-medium">UI/UX Дизайн</span>
+                                <span class="bg-secondary/10 dark:bg-secondary/20 text-secondary dark:text-secondary-light px-4 py-2 rounded-full font-medium">Node.js</span>
+                                <span class="bg-accent/10 dark:bg-accent/20 text-accent dark:text-accent-light px-4 py-2 rounded-full font-medium">Tailwind CSS</span>
+                                <span class="bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light px-4 py-2 rounded-full font-medium">TypeScript</span>
+                                <span class="bg-secondary/10 dark:bg-secondary/20 text-secondary dark:text-secondary-light px-4 py-2 rounded-full font-medium">Vue.js</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-2xl font-semibold text-dark dark:text-light mb-3">Опыт</h3>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                                Более 3 лет опыта в веб-разработке. Работал над различными проектами от сайтов для малого бизнеса до сложных веб-приложений. Специализируюсь на создании интуитивных пользовательских интерфейсов и оптимизации производительности.
+                            </p>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 bg-dark dark:bg-gray-700 text-white dark:text-light rounded-full flex items-center justify-center hover:bg-primary dark:hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="GitHub профиль">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-dark dark:bg-gray-700 text-white dark:text-light rounded-full flex items-center justify-center hover:bg-primary dark:hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn профиль">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://t.me/sigmaarttar" target="_blank" rel="noopener noreferrer" class="w-12 h-12 bg-dark dark:bg-gray-700 text-white dark:text-light rounded-full flex items-center justify-center hover:bg-primary dark:hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800 section-hidden" aria-label="Проекты">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-dark dark:text-light mb-4">Избранные проекты</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mb-4"></div>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Коллекция моих последних работ, демонстрирующих креативность и техническую экспертизу.
+                    </p>
+                </div>
+                
+                <!-- Project Filters -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="px-4 py-2 rounded-full bg-primary text-white font-medium filter-btn transform hover:scale-105 transition-all" data-filter="all" aria-label="Показать все проекты">Все</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-medium filter-btn transform hover:scale-105" data-filter="web" aria-label="Фильтр: Веб-разработка">Веб-разработка</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-medium filter-btn transform hover:scale-105" data-filter="mobile" aria-label="Фильтр: Мобильные приложения">Мобильные приложения</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-medium filter-btn transform hover:scale-105" data-filter="design" aria-label="Фильтр: Дизайн">Дизайн</button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid" role="list">
+                    <!-- Projects will be dynamically loaded here -->
+                </div>
+                
+                <!-- Loading indicator -->
+                <div id="projects-loading" class="hidden text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button 
+                        id="load-more" 
+                        class="bg-primary text-white px-8 py-3 rounded-full font-semibold hover:bg-secondary transition-all duration-300 transform hover:scale-105 hidden"
+                        aria-label="Загрузить еще проекты"
+                    >
+                        <i class="fas fa-plus mr-2"></i>Загрузить еще
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white dark:bg-gray-900 section-hidden" aria-label="Контакты">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-dark dark:text-light mb-4">Давайте работать вместе</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mb-4"></div>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Есть проект? Буду рад обсудить, как мы можем воплотить ваши идеи в жизнь.
+                    </p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-dark dark:text-light mb-6">Свяжитесь со мной</h3>
+                            <form class="space-y-6" id="contact-form" novalidate>
+                                <div>
+                                    <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Имя *</label>
+                                    <input 
+                                        type="text" 
+                                        id="name" 
+                                        name="name"
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-dark dark:text-light transition-colors" 
+                                        required
+                                        aria-required="true"
+                                        aria-invalid="false"
+                                    >
+                                    <span class="error-message hidden text-red-500 text-sm mt-1"></span>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Email *</label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email"
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-dark dark:text-light transition-colors" 
+                                        required
+                                        aria-required="true"
+                                        aria-invalid="false"
+                                    >
+                                    <span class="error-message hidden text-red-500 text-sm mt-1"></span>
+                                </div>
+                                
+                                <div>
+                                    <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2 font-medium">Сообщение *</label>
+                                    <textarea 
+                                        id="message" 
+                                        name="message"
+                                        rows="5" 
+                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-800 text-dark dark:text-light transition-colors resize-none" 
+                                        required
+                                        aria-required="true"
+                                        aria-invalid="false"
+                                    ></textarea>
+                                    <span class="error-message hidden text-red-500 text-sm mt-1"></span>
+                                </div>
+                                
+                                <div id="form-success" class="hidden p-4 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg">
+                                    <i class="fas fa-check-circle mr-2"></i>Спасибо! Ваше сообщение отправлено.
+                                </div>
+                                
+                                <div id="form-error" class="hidden p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg">
+                                    <i class="fas fa-exclamation-circle mr-2"></i>Произошла ошибка. Попробуйте еще раз.
+                                </div>
+                                
+                                <button 
+                                    type="submit" 
+                                    class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-secondary transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    id="submit-btn"
+                                >
+                                    <span class="submit-text">
+                                        <i class="fas fa-paper-plane mr-2"></i>Отправить сообщение
+                                    </span>
+                                    <span class="submit-loading hidden">
+                                        <i class="fas fa-spinner fa-spin mr-2"></i>Отправка...
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
+                            <h3 class="text-2xl font-semibold text-dark dark:text-light mb-6">Контактная информация</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark dark:text-light">Email</p>
+                                        <a id="contact-email-link" href="mailto:hello@portfolio.com" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">hello@portfolio.com</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark dark:text-light">Телефон</p>
+                                        <a id="contact-phone-link" href="tel:+79259871581" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">8 925 987-15-81</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fab fa-telegram"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark dark:text-light">Telegram</p>
+                                        <a href="https://t.me/sigmaarttar" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors">@sigmaarttar</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-dark dark:text-light">Местоположение</p>
+                                        <p class="text-gray-600 dark:text-gray-300">Москва, Россия</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                                <p class="text-gray-600 dark:text-gray-300 mb-4">Следите за мной в соцсетях:</p>
+                                <div class="flex gap-4">
+                                    <a href="#" class="w-10 h-10 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-110" aria-label="GitHub">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" class="w-10 h-10 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="https://t.me/sigmaarttar" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-110" aria-label="Telegram">
+                                        <i class="fab fa-telegram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark dark:bg-gray-950 text-white py-12" role="contentinfo">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold mb-4 gradient-text">Портфолио</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Создаю цифровые продукты, которые вдохновляют и вовлекают пользователей через инновационный дизайн и разработку.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://t.me/sigmaarttar" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="Telegram">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 transform hover:scale-110" aria-label="VK">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Быстрые ссылки</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors duration-300" onclick="navigateTo('home'); return false;">Главная</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300" onclick="navigateTo('about'); return false;">Обо мне</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-white transition-colors duration-300" onclick="navigateTo('projects'); return false;">Проекты</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300" onclick="navigateTo('contact'); return false;">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Связь</h4>
+                    <div class="space-y-2">
+                        <p class="text-gray-400">Подпишитесь на меня в соцсетях для обновлений и новостей.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 dark:border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; <span id="current-year">2024</span> Портфолио. Все права защищены.</p>
+                <p class="mt-2 text-sm">
+                    <a href="admin.html" class="hover:text-white transition-colors opacity-50 hover:opacity-100">
+                        <i class="fas fa-cog mr-1"></i>Админ-панель
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button 
+        id="back-to-top" 
+        class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg hover:bg-secondary transition-all duration-300 transform hover:scale-110 hidden z-40"
+        aria-label="Вернуться наверх"
+    >
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Projects Data - Load from localStorage or use default
+        const STORAGE_KEY_PROJECTS = 'portfolio_projects';
+
+        function getDefaultProjects() {
+            return [
+                {
+                    "id": 1,
+                    "title": "Интернет-магазин",
+                    "description": "Современное e-commerce решение с бесшовным пользовательским опытом и безопасной интеграцией платежей.",
+                    "category": "web",
+                    "image": "https://picsum.photos/400/300?random=3",
+                    "technologies": ["React", "Node.js", "MongoDB"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 2,
+                    "title": "Мобильное банковское приложение",
+                    "description": "Безопасное и интуитивное мобильное банковское приложение с расширенными финансовыми функциями.",
+                    "category": "mobile",
+                    "image": "https://picsum.photos/400/300?random=4",
+                    "technologies": ["React Native", "Firebase", "Stripe"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 3,
+                    "title": "Сайт-портфолио",
+                    "description": "Элегантный сайт-портфолио для демонстрации творческих работ с плавными анимациями.",
+                    "category": "design",
+                    "image": "https://picsum.photos/400/300?random=5",
+                    "technologies": ["HTML", "CSS", "JavaScript"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 4,
+                    "title": "Инструмент управления задачами",
+                    "description": "Платформа для совместного управления задачами с обновлениями в реальном времени и функциями для команд.",
+                    "category": "web",
+                    "image": "https://picsum.photos/400/300?random=6",
+                    "technologies": ["Vue.js", "Express", "PostgreSQL"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 5,
+                    "title": "Погодная панель",
+                    "description": "Интерактивная погодная панель с красивой визуализацией данных и прогнозами по местоположению.",
+                    "category": "web",
+                    "image": "https://picsum.photos/400/300?random=7",
+                    "technologies": ["JavaScript", "Chart.js", "API Integration"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 6,
+                    "title": "Социальная платформа",
+                    "description": "Функциональная социальная платформа с обменом сообщениями в реальном времени и возможностью делиться контентом.",
+                    "category": "web",
+                    "image": "https://picsum.photos/400/300?random=8",
+                    "technologies": ["React", "Socket.io", "MongoDB"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 7,
+                    "title": "Приложение для фитнеса",
+                    "description": "Мобильное приложение для отслеживания тренировок и питания с персонализированными рекомендациями.",
+                    "category": "mobile",
+                    "image": "https://picsum.photos/400/300?random=9",
+                    "technologies": ["Flutter", "Firebase", "Health API"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                },
+                {
+                    "id": 8,
+                    "title": "Лендинг для SaaS",
+                    "description": "Привлекательный лендинг для SaaS-продукта с высокой конверсией и адаптивным дизайном.",
+                    "category": "design",
+                    "image": "https://picsum.photos/400/300?random=10",
+                    "technologies": ["HTML", "Tailwind CSS", "JavaScript"],
+                    "liveUrl": "#",
+                    "githubUrl": "#"
+                }
+            ];
+        }
+
+        function loadProjects() {
+            const savedProjects = localStorage.getItem(STORAGE_KEY_PROJECTS);
+            if (savedProjects) {
+                try {
+                    return JSON.parse(savedProjects);
+                } catch (e) {
+                    console.error('Error loading projects from localStorage:', e);
+                    return getDefaultProjects();
+                }
+            }
+            return getDefaultProjects();
+        }
+
+        // Load projects from localStorage or use defaults
+        let projects = loadProjects();
+
+        // Theme Management
+        class ThemeManager {
+            constructor() {
+                this.theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                this.init();
+            }
+
+            init() {
+                this.applyTheme(this.theme);
+                this.setupEventListeners();
+            }
+
+            applyTheme(theme) {
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                localStorage.setItem('theme', theme);
+                this.theme = theme;
+            }
+
+            toggle() {
+                const newTheme = this.theme === 'dark' ? 'light' : 'dark';
+                this.applyTheme(newTheme);
+            }
+
+            setupEventListeners() {
+                const toggleButtons = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+                toggleButtons.forEach(btn => {
+                    btn.addEventListener('click', () => this.toggle());
+                });
+            }
+        }
+
+        // Navigation
+        function navigateTo(section) {
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            
+            // Close mobile menu if open
+            const mobileMenu = document.getElementById("mobile-menu");
+            const menuButton = document.getElementById("mobile-menu-button");
+            if (!mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+                menuButton.setAttribute("aria-expanded", "false");
+            }
+        }
+
+        // Generate Project Cards
+        function generateProjectCards(filter = "all", limit = 6) {
+            // Reload projects from localStorage to get latest updates
+            projects = loadProjects();
+            
+            const projectsGrid = document.getElementById("projects-grid");
+            const loadingIndicator = document.getElementById("projects-loading");
+            
+            // Show loading
+            loadingIndicator.classList.remove("hidden");
+            projectsGrid.innerHTML = "";
+            
+            // Simulate loading delay for better UX
+            setTimeout(() => {
+                const filteredProjects = filter === "all" 
+                    ? projects 
+                    : projects.filter(project => project.category === filter);
+                
+                const projectsToShow = filteredProjects.slice(0, limit);
+                
+                projectsToShow.forEach((project, index) => {
+                    const projectCard = document.createElement("article");
+                    projectCard.className = "project-card bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden animate-slide-up";
+                    projectCard.style.animationDelay = `${index * 0.1}s`;
+                    projectCard.setAttribute("role", "listitem");
+                    
+                    projectCard.innerHTML = `
+                        <div class="relative overflow-hidden">
+                            <img 
+                                src="${project.image}" 
+                                alt="${project.title}" 
+                                class="w-full h-48 object-cover"
+                                loading="lazy"
+                                width="400"
+                                height="300"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <div class="flex gap-4">
+                                    <a href="${project.liveUrl}" 
+                                       class="bg-white text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors"
+                                       aria-label="Посмотреть демо ${project.title}">
+                                        <i class="fas fa-external-link-alt mr-2"></i>Демо
+                                    </a>
+                                    <a href="${project.githubUrl}" 
+                                       class="bg-white text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition-colors"
+                                       aria-label="Посмотреть код ${project.title}">
+                                        <i class="fab fa-github mr-2"></i>Код
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-primary dark:text-primary-light text-sm font-semibold">${getCategoryName(project.category)}</span>
+                            <h3 class="text-xl font-bold text-dark dark:text-light mt-2 mb-3">${project.title}</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">${project.description}</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${project.technologies.map(tech => 
+                                    `<span class="bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-3 py-1 rounded-full text-sm">${tech}</span>`
+                                ).join("")}
+                            </div>
+                        </div>
+                    `;
+                    
+                    projectsGrid.appendChild(projectCard);
+                });
+                
+                // Lazy load images
+                lazyLoadImages();
+                
+                // Hide loading
+                loadingIndicator.classList.add("hidden");
+                
+                // Show/hide load more button
+                const loadMoreBtn = document.getElementById("load-more");
+                if (filteredProjects.length > limit) {
+                    loadMoreBtn.classList.remove("hidden");
+                    loadMoreBtn.setAttribute("data-limit", limit);
+                    loadMoreBtn.setAttribute("data-filter", filter);
+                } else {
+                    loadMoreBtn.classList.add("hidden");
+                }
+            }, 300);
+        }
+
+        // Lazy Load Images
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('img[loading="lazy"]');
+            
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+                
+                images.forEach(img => imageObserver.observe(img));
+            } else {
+                // Fallback for older browsers
+                images.forEach(img => img.classList.add('loaded'));
+            }
+        }
+
+        // Load photos from localStorage
+        function loadPhotosFromStorage() {
+            const STORAGE_KEY_PHOTOS = 'portfolio_photos';
+            const savedPhotos = localStorage.getItem(STORAGE_KEY_PHOTOS);
+            
+            if (savedPhotos) {
+                try {
+                    const photos = JSON.parse(savedPhotos);
+                    
+                    // Update profile photo
+                    const profilePhoto = document.getElementById('main-profile-photo');
+                    if (profilePhoto && photos.profile) {
+                        profilePhoto.src = photos.profile;
+                    }
+                    
+                    // Update about photo
+                    const aboutPhoto = document.getElementById('main-about-photo');
+                    if (aboutPhoto && photos.about) {
+                        aboutPhoto.src = photos.about;
+                    }
+                } catch (e) {
+                    console.error('Error loading photos:', e);
+                }
+            }
+        }
+
+        // Load contacts from localStorage
+        function loadContactsFromStorage() {
+            const STORAGE_KEY_CONTACTS = 'portfolio_contacts';
+            const savedContacts = localStorage.getItem(STORAGE_KEY_CONTACTS);
+            
+            if (savedContacts) {
+                try {
+                    const contacts = JSON.parse(savedContacts);
+                    
+                    // Update email
+                    const emailLink = document.getElementById('contact-email-link');
+                    if (emailLink && contacts.email) {
+                        emailLink.textContent = contacts.email;
+                        emailLink.href = `mailto:${contacts.email}`;
+                    }
+                    
+                    // Update phone
+                    const phoneLink = document.getElementById('contact-phone-link');
+                    if (phoneLink && contacts.phone) {
+                        phoneLink.textContent = contacts.phone;
+                        // Format phone for tel: link (remove spaces and special chars)
+                        const phoneFormatted = contacts.phone.replace(/\s+/g, '').replace(/[^\d+]/g, '');
+                        phoneLink.href = `tel:${phoneFormatted}`;
+                    }
+                } catch (e) {
+                    console.error('Error loading contacts:', e);
+                }
+            }
+        }
+
+        // Check and fix image loading
+        function checkImages() {
+            const images = document.querySelectorAll('img[src^="images/"]');
+            images.forEach(img => {
+                // Test if image exists
+                const testImg = new Image();
+                testImg.onerror = function() {
+                    // Image doesn't exist, use placeholder
+                    if (img.src.includes('photo.jpg')) {
+                        img.src = 'https://picsum.photos/200/200?random=1';
+                    } else if (img.src.includes('photo-about.jpg')) {
+                        img.src = 'https://picsum.photos/500/400?random=2';
+                    }
+                };
+                testImg.onload = function() {
+                    // Image exists, ensure it's visible
+                    img.style.opacity = '1';
+                };
+                testImg.src = img.src;
+            });
+        }
+
+        // Get Category Name in Russian
+        function getCategoryName(category) {
+            const categories = {
+                "web": "Веб-разработка",
+                "mobile": "Мобильные приложения",
+                "design": "Дизайн"
+            };
+            return categories[category] || category;
+        }
+
+        // Form Validation
+        class FormValidator {
+            constructor(formId) {
+                this.form = document.getElementById(formId);
+                this.fields = this.form.querySelectorAll('input[required], textarea[required]');
+                this.init();
+            }
+
+            init() {
+                this.fields.forEach(field => {
+                    field.addEventListener('blur', () => this.validateField(field));
+                    field.addEventListener('input', () => this.clearError(field));
+                });
+                
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+            }
+
+            validateField(field) {
+                const errorElement = field.parentElement.querySelector('.error-message');
+                let isValid = true;
+                let errorMessage = '';
+
+                // Check if empty
+                if (field.value.trim() === '') {
+                    isValid = false;
+                    errorMessage = 'Это поле обязательно для заполнения';
+                }
+                // Email validation
+                else if (field.type === 'email' && !this.isValidEmail(field.value)) {
+                    isValid = false;
+                    errorMessage = 'Введите корректный email адрес';
+                }
+                // Message length validation
+                else if (field.id === 'message' && field.value.trim().length < 10) {
+                    isValid = false;
+                    errorMessage = 'Сообщение должно содержать минимум 10 символов';
+                }
+
+                if (!isValid) {
+                    this.showError(field, errorMessage);
+                    field.setAttribute('aria-invalid', 'true');
+                } else {
+                    this.clearError(field);
+                    field.setAttribute('aria-invalid', 'false');
+                }
+
+                return isValid;
+            }
+
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            showError(field, message) {
+                const errorElement = field.parentElement.querySelector('.error-message');
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.remove('hidden');
+                }
+                field.classList.add('border-red-500');
+            }
+
+            clearError(field) {
+                const errorElement = field.parentElement.querySelector('.error-message');
+                if (errorElement) {
+                    errorElement.classList.add('hidden');
+                }
+                field.classList.remove('border-red-500');
+            }
+
+            validateForm() {
+                let isFormValid = true;
+                this.fields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isFormValid = false;
+                    }
+                });
+                return isFormValid;
+            }
+
+            async handleSubmit(event) {
+                event.preventDefault();
+                
+                if (!this.validateForm()) {
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submit-btn');
+                const submitText = submitBtn.querySelector('.submit-text');
+                const submitLoading = submitBtn.querySelector('.submit-loading');
+                const successMessage = document.getElementById('form-success');
+                const errorMessage = document.getElementById('form-error');
+
+                // Show loading state
+                submitBtn.disabled = true;
+                submitText.classList.add('hidden');
+                submitLoading.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+                errorMessage.classList.add('hidden');
+
+                // Simulate form submission
+                const formData = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    message: document.getElementById("message").value
+                };
+
+                try {
+                    // Here you would typically send the data to a server
+                    // const response = await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
+                    
+                    // Simulate API call
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Show success message
+                    successMessage.classList.remove('hidden');
+                    this.form.reset();
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                } catch (error) {
+                    errorMessage.classList.remove('hidden');
+                } finally {
+                    // Reset button state
+                    submitBtn.disabled = false;
+                    submitText.classList.remove('hidden');
+                    submitLoading.classList.add('hidden');
+                }
+            }
+        }
+
+        // Intersection Observer for Section Animations
+        function setupIntersectionObserver() {
+            const sections = document.querySelectorAll('.section-hidden');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Active Navigation Highlighting
+        function setupActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        
+                        navLinks.forEach(link => {
+                            link.classList.remove('active-nav');
+                            if (link.getAttribute('data-section') === id) {
+                                link.classList.add('active-nav');
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '-100px 0px -50% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        // Back to Top Button
+        function setupBackToTop() {
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Mobile Menu Toggle
+        function setupMobileMenu() {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                menuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+                
+                // Change icon
+                const icon = menuButton.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!menuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    menuButton.setAttribute('aria-expanded', 'false');
+                    const icon = menuButton.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Update Current Year
+        function updateCurrentYear() {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
+
+        // Admin Login Modal
+        function setupAdminLogin() {
+            const ADMIN_PASSWORD = 'Tema36Tar';
+            const loginModal = document.getElementById('admin-login-modal');
+            const loginForm = document.getElementById('admin-login-form');
+            const passwordInput = document.getElementById('admin-password-input');
+            const errorDiv = document.getElementById('admin-login-error');
+            const closeBtn = document.getElementById('close-admin-modal');
+            
+            // Open modal buttons
+            const openButtons = [
+                document.getElementById('admin-login-btn'),
+                document.getElementById('admin-login-btn-mobile')
+            ];
+            
+            openButtons.forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        loginModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        passwordInput.focus();
+                    });
+                }
+            });
+            
+            // Close modal
+            function closeModal() {
+                loginModal.classList.add('hidden');
+                document.body.style.overflow = '';
+                passwordInput.value = '';
+                errorDiv.classList.add('hidden');
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
+            }
+            
+            // Close on backdrop click
+            loginModal.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    closeModal();
+                }
+            });
+            
+            // Handle form submission
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const enteredPassword = passwordInput.value;
+                    const savedPassword = localStorage.getItem('admin_password') || ADMIN_PASSWORD;
+                    
+                    if (enteredPassword === savedPassword) {
+                        // Set session
+                        sessionStorage.setItem('admin_authenticated', 'true');
+                        // Redirect to admin panel
+                        window.location.href = 'admin.html';
+                    } else {
+                        errorDiv.classList.remove('hidden');
+                        passwordInput.focus();
+                        passwordInput.select();
+                    }
+                });
+            }
+            
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !loginModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize theme manager
+            const themeManager = new ThemeManager();
+            
+            // Reload projects from localStorage
+            projects = loadProjects();
+            
+            // Generate initial project cards
+            generateProjectCards();
+            
+            // Initialize form validator
+            const formValidator = new FormValidator('contact-form');
+            
+            // Reload projects, photos and contacts when page becomes visible (e.g., returning from admin panel)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    projects = loadProjects();
+                    generateProjectCards();
+                    loadPhotosFromStorage();
+                    loadContactsFromStorage();
+                }
+            });
+            
+            // Setup filter buttons
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active filter button
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                    });
+                    
+                    this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                    this.classList.add('bg-primary', 'text-white');
+                    
+                    // Filter projects
+                    const filter = this.getAttribute('data-filter');
+                    generateProjectCards(filter, 6);
+                });
+            });
+            
+            // Load more projects
+            document.getElementById('load-more').addEventListener('click', function() {
+                const currentLimit = parseInt(this.getAttribute('data-limit')) || 6;
+                const filter = this.getAttribute('data-filter') || 'all';
+                const newLimit = currentLimit + 3;
+                generateProjectCards(filter, newLimit);
+            });
+            
+            // Setup intersection observer
+            setupIntersectionObserver();
+            
+            // Setup active navigation
+            setupActiveNav();
+            
+            // Setup back to top button
+            setupBackToTop();
+            
+            // Setup mobile menu
+            setupMobileMenu();
+            
+            // Update current year
+            updateCurrentYear();
+            
+            // Load photos from localStorage
+            loadPhotosFromStorage();
+            
+            // Load contacts from localStorage
+            loadContactsFromStorage();
+            
+            // Lazy load initial images
+            lazyLoadImages();
+            
+            // Check images and fix if needed
+            checkImages();
+            
+            // Prevent form submission on Enter in textarea (allow Shift+Enter for new line)
+            const messageField = document.getElementById('message');
+            if (messageField) {
+                messageField.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                    }
+                });
+            }
+            
+            // Setup admin login modal
+            setupAdminLogin();
+        });
+    </script>
+</body>
+</html>
+
